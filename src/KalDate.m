@@ -39,6 +39,18 @@ static KalDate *today;
   return [KalDate dateForDay:[parts day] month:[parts month] year:[parts year]];
 }
 
++ (KalDate *)dateFromNSDate:(NSDate *)date withColorId:(NSUInteger) colorId
+{
+    NSDateComponents *parts = [date cc_componentsForMonthDayAndYear];
+    
+    KalDate *kalDate = [[[KalDate alloc] initForDay:[parts day]
+                                              month:[parts month]
+                                               year:[parts year]] autorelease];
+    kalDate.colorId = colorId;
+    
+    return kalDate;
+}
+
 - (id)initForDay:(unsigned int)day month:(unsigned int)month year:(unsigned int)year
 {
   if ((self = [super init])) {

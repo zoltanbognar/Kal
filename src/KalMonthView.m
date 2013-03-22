@@ -93,19 +93,78 @@ extern const CGSize kTileSize;
   self.height = 1.f + kTileSize.height * numWeeks;
 }
 
+- (KalTileMarkerColor) getMarkerColor:(NSArray*) dates
+{
+    __block BOOL red = NO;
+    __block BOOL yellow = NO;
+    __block BOOL green = NO;
+    
+    [dates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
+        KalDate * kalDate = (KalDate*) obj;
+        
+        if (!red && kalDate.colorId == 0)
+        {
+            red = YES;
+        }
+        else if (!yellow && kalDate.colorId == 1)
+        {
+            yellow = YES;
+        }
+        else if (!green && kalDate.colorId == 2)
+        {
+            green = YES;
+        }
+    }];
+    
+    KalTileMarkerColor ret = KalTileMarkerColorDefault;
+    
+    
+    if (red && !yellow && !green)
+    {
+        ret = KalTileMarkerColorRed;
+    }
+    else if (!red && !yellow && green)
+    {
+        ret = KalTileMarkerColorGreen;
+    }
+    else if (!red && !yellow && !green)
+    {
+        ret = KalTileMarkerColorDefault;
+    }
+    else
+    {
+        ret = KalTileMarkerColorYellow;
+    }
+ 
+    return  ret;
+}
+    
+
 - (void)markTilesForDates:(NSArray *)dates
 {
   for (KalTileView *tile in self.subviews)
   {
-    tile.marked = [dates containsObject:tile.date];
+    NSArray * filtered = [dates filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NSDate = %@",[tile.date NSDate]]];
+      
+    //tile.marked = [dates containsObject:tile.date];
+      
+    tile.marked = ([filtered count] > 0)?YES:NO;
+    tile.color = [self getMarkerColor:filtered];
+      
     NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
-    if (dayString) {
+   
+    if (dayString)
+    {
       NSMutableString *helperText = [[[NSMutableString alloc] initWithCapacity:128] autorelease];
       if ([tile.date isToday])
         [helperText appendFormat:@"%@ ", NSLocalizedString(@"Today", @"Accessibility text for a day tile that represents today")];
+        
       [helperText appendString:dayString];
+        
       if (tile.marked)
         [helperText appendFormat:@". %@", NSLocalizedString(@"Marked", @"Accessibility text for a day tile which is marked with a small dot")];
+        
       [tile setAccessibilityLabel:helperText];
     }
   }

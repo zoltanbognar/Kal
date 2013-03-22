@@ -14,8 +14,11 @@
   } a;
 }
 
+@property NSUInteger colorId;
+
 + (KalDate *)dateForDay:(unsigned int)day month:(unsigned int)month year:(unsigned int)year;
 + (KalDate *)dateFromNSDate:(NSDate *)date;
++ (KalDate *)dateFromNSDate:(NSDate *)date withColorId:(NSUInteger) colorId;
 
 - (id)initForDay:(unsigned int)day month:(unsigned int)month year:(unsigned int)year;
 - (unsigned int)day;

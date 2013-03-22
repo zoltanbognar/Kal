@@ -12,6 +12,14 @@ enum {
 };
 typedef char KalTileType;
 
+enum {
+    KalTileMarkerColorRed   = 0,
+    KalTileMarkerColorYellow  = 1 << 0,
+    KalTileMarkerColorGreen   = 1 << 1,
+    KalTileMarkerColorDefault   = 1 << 2,
+};
+typedef char KalTileMarkerColor;
+
 @class KalDate;
 
 @interface KalTileView : UIView
@@ -23,6 +31,7 @@ typedef char KalTileType;
     unsigned int highlighted : 1;
     unsigned int marked : 1;
     unsigned int type : 2;
+    unsigned int color : 3;
   } flags;
 }
 
@@ -31,6 +40,7 @@ typedef char KalTileType;
 @property (nonatomic, getter=isSelected) BOOL selected;
 @property (nonatomic, getter=isMarked) BOOL marked;
 @property (nonatomic) KalTileType type;
+@property (nonatomic) KalTileMarkerColor color;
 
 - (void)resetState;
 - (BOOL)isToday;

@@ -33,7 +33,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 @interface KalViewController ()
 @property (nonatomic, retain, readwrite) NSDate *initialDate;
 @property (nonatomic, retain, readwrite) NSDate *selectedDate;
-- (KalView*)calendarView;
+
 @end
 
 @implementation KalViewController

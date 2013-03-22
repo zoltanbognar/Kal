@@ -40,29 +40,102 @@ extern const CGSize kTileSize;
   CGContextTranslateCTM(ctx, 0, kTileSize.height);
   CGContextScaleCTM(ctx, 1, -1);
   
-  if ([self isToday] && self.selected) {
-    [[[UIImage imageNamed:@"Kal.bundle/kal_tile_today_selected.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
-    textColor = [UIColor whiteColor];
-    shadowColor = [UIColor blackColor];
-    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
-  } else if ([self isToday] && !self.selected) {
+  if ([self isToday] && self.selected)
+  {
+      [[[UIImage imageNamed:@"Kal.bundle/kal_tile_today_selected.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
+      textColor = [UIColor whiteColor];
+      shadowColor = [UIColor blackColor];
+      
+      switch (self.color)
+      {
+          case KalTileMarkerColorRed:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+              break;
+          case KalTileMarkerColorYellow:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_today.png"];
+              break;
+          case KalTileMarkerColorGreen:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_today.png"];
+              break;
+          default:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+              break;
+      }
+    
+  }
+  else if ([self isToday] && !self.selected)
+  {
     [[[UIImage imageNamed:@"Kal.bundle/kal_tile_today.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
-    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
-  } else if (self.selected) {
+    //markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+      switch (self.color)
+      {
+          case KalTileMarkerColorRed:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+              break;
+          case KalTileMarkerColorYellow:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_today.png"];
+              break;
+          case KalTileMarkerColorGreen:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_today.png"];
+              break;
+          default:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+              break;
+      }
+
+  }
+  else if (self.selected)
+  {
     [[[UIImage imageNamed:@"Kal.bundle/kal_tile_selected.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:0] drawInRect:CGRectMake(0, -1, kTileSize.width+1, kTileSize.height+1)];
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
-    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
-  } else if (self.belongsToAdjacentMonth) {
+    //markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_selected.png"];
+      switch (self.color)
+      {
+          case KalTileMarkerColorRed:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_selected.png"];
+              break;
+          case KalTileMarkerColorYellow:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_selected.png"];
+              break;
+          case KalTileMarkerColorGreen:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_selected.png"];
+              break;
+          default:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
+              break;
+      }
+
+  }
+  else if (self.belongsToAdjacentMonth)
+  {
     textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_dim_text_fill.png"]];
     shadowColor = nil;
     markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
-  } else {
+  }
+  else
+  {
     textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_text_fill.png"]];
     shadowColor = [UIColor whiteColor];
-    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+    //markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red.png"];
+      switch (self.color)
+      {
+          case KalTileMarkerColorRed:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red.png"];
+              break;
+          case KalTileMarkerColorYellow:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow.png"];
+              break;
+          case KalTileMarkerColorGreen:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green.png"];
+              break;
+          default:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+              break;
+      }
+
   }
   
   if (flags.marked)
