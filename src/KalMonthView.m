@@ -139,7 +139,25 @@ extern const CGSize kTileSize;
  
     return  ret;
 }
+
+- (BOOL) hasNewSelected:(NSArray*) dates
+{
+    __block BOOL ret = NO;
     
+    [dates enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         KalDate * kalDate = (KalDate*) obj;
+         
+         if (kalDate.selectedDate == YES)
+         {
+             ret = YES;
+             *stop = YES;
+         }
+         
+    }];
+
+    return ret;
+}
 
 - (void)markTilesForDates:(NSArray *)dates
 {
@@ -151,6 +169,7 @@ extern const CGSize kTileSize;
       
     tile.marked = ([filtered count] > 0)?YES:NO;
     tile.color = [self getMarkerColor:filtered];
+    tile.new_edit = [self hasNewSelected:filtered];
       
     NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
    

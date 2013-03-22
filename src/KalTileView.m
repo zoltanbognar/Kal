@@ -35,6 +35,8 @@ extern const CGSize kTileSize;
   UIColor *shadowColor = nil;
   UIColor *textColor = nil;
   UIImage *markerImage = nil;
+  UIImage *selectionImage = nil;
+    
   CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
       
   CGContextTranslateCTM(ctx, 0, kTileSize.height);
@@ -137,10 +139,20 @@ extern const CGSize kTileSize;
       }
 
   }
+    
+    if (flags.new_edit)
+    {
+        selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+        [selectionImage drawInRect:CGRectMake(21.f, 35.f, 4.f, 5.f)];
+    }
+  
   
   if (flags.marked)
+  {
     [markerImage drawInRect:CGRectMake(21.f, 5.f, 4.f, 5.f)];
-  
+    
+  }
+    
   NSUInteger n = [self.date day];
   NSString *dayText = [NSString stringWithFormat:@"%lu", (unsigned long)n];
   const char *day = [dayText cStringUsingEncoding:NSUTF8StringEncoding];
@@ -236,6 +248,18 @@ extern const CGSize kTileSize;
   flags.marked = marked;
   [self setNeedsDisplay];
 }
+
+- (BOOL)isNew_edit { return flags.new_edit; }
+
+- (void)setNew_edit:(BOOL)new_edit
+{
+    if (flags.new_edit == new_edit)
+        return;
+    
+    flags.new_edit = new_edit;
+    [self setNeedsDisplay];
+}
+
 
 - (KalTileType)type { return flags.type; }
 

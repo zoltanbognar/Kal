@@ -32,6 +32,7 @@ typedef char KalTileMarkerColor;
     unsigned int marked : 1;
     unsigned int type : 2;
     unsigned int color : 3;
+    unsigned int new_edit : 1;
   } flags;
 }
 
@@ -39,6 +40,7 @@ typedef char KalTileMarkerColor;
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
 @property (nonatomic, getter=isMarked) BOOL marked;
+@property (nonatomic, getter=isNew_Edit) BOOL new_edit;
 @property (nonatomic) KalTileType type;
 @property (nonatomic) KalTileMarkerColor color;
 

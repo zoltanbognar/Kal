@@ -15,6 +15,7 @@
 }
 
 @property NSUInteger colorId;
+@property BOOL selectedDate;
 
 + (KalDate *)dateForDay:(unsigned int)day month:(unsigned int)month year:(unsigned int)year;
 + (KalDate *)dateFromNSDate:(NSDate *)date;

@@ -56,6 +56,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
     [self addSubview:frontMonthView];
 
     [self jumpToSelectedMonth];
+      
+      self.tochesBegin = NO;
   }
   return self;
 }
@@ -90,12 +92,42 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)setSelectedTile:(KalTileView *)tile
 {
-  if (selectedTile != tile) {
-    selectedTile.selected = NO;
-    selectedTile = [tile retain];
-    tile.selected = YES;
-    [delegate didSelectDate:tile.date];
-  }
+    
+    NSLog(@"KalGridView::setSelectedTile - touchBegin:%d",self.tochesBegin);
+    
+    if (self.selectionMode)
+    {
+        if (selectedTile != tile)
+        {
+            selectedTile.selected = NO;
+            selectedTile = [tile retain];
+            [delegate didSelectDate:tile.date];
+        }
+        
+        if (self.tochesBegin)
+        {
+            self.selectedTile.selected = YES;
+            self.tochesBegin = NO;
+        }
+        else
+        {
+          self.selectedTile.selected = NO;
+        }
+        
+    }
+    else
+    {
+        if (selectedTile != tile)
+        {
+            selectedTile.selected = NO;
+            selectedTile = [tile retain];
+            tile.selected = YES;
+            [delegate didSelectDate:tile.date];
+        }
+    }
+    
+
+    
 }
 
 - (void)receivedTouches:(NSSet *)touches withEvent:event
@@ -113,6 +145,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
       self.highlightedTile = tile;
     } else {
       self.highlightedTile = nil;
+      self.tochesBegin = YES;
       self.selectedTile = tile;
     }
   }
@@ -121,6 +154,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
   [self receivedTouches:touches withEvent:event];
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -144,10 +178,13 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
       }
       self.selectedTile = [frontMonthView tileForDate:tile.date];
     } else {
-      self.selectedTile = tile;
+        self.tochesBegin = NO;
+        self.selectedTile = tile;
     }
   }
   self.highlightedTile = nil;
+    
+
 }
 
 #pragma mark -

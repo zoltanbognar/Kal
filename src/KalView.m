@@ -155,6 +155,9 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
   // The tile grid (the calendar body)
   gridView = [[KalGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:delegate];
+    
+    gridView.selectionMode = _selectionMode;
+    
   [gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
   [contentView addSubview:gridView];
 
