@@ -101,13 +101,14 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
         {
             selectedTile.selected = NO;
             selectedTile = [tile retain];
-            [delegate didSelectDate:tile.date];
+            
         }
         
         if (self.tochesBegin)
         {
             self.selectedTile.selected = YES;
             self.tochesBegin = NO;
+            [delegate didSelectDate:tile.date];
         }
         else
         {

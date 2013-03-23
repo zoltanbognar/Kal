@@ -20,6 +20,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
 @implementation KalView
 
 @synthesize delegate, tableView;
+@synthesize selectionMode = _selectionMode;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)theDelegate logic:(KalLogic *)theLogic
 {
@@ -42,6 +43,17 @@ static const CGFloat kMonthLabelHeight = 17.f;
   }
   
   return self;
+}
+
+- (BOOL) selectionMode
+{
+    return _selectionMode;
+}
+
+- (void) setSelectionMode:(BOOL)selectionMode
+{
+    _selectionMode = selectionMode;
+    gridView.selectionMode = selectionMode;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -155,8 +167,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
   // The tile grid (the calendar body)
   gridView = [[KalGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:delegate];
-    
-    gridView.selectionMode = _selectionMode;
     
   [gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
   [contentView addSubview:gridView];

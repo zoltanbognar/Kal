@@ -63,6 +63,11 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
               break;
       }
+      
+      if (flags.new_edit)
+      {
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+      }
     
   }
   else if ([self isToday] && !self.selected)
@@ -87,6 +92,10 @@ extern const CGSize kTileSize;
               break;
       }
 
+      if (flags.new_edit)
+      {
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+      }
   }
   else if (self.selected)
   {
@@ -110,12 +119,36 @@ extern const CGSize kTileSize;
               break;
       }
 
+      if (flags.new_edit)
+      {
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
+      }
+
   }
   else if (self.belongsToAdjacentMonth)
   {
     textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_dim_text_fill.png"]];
     shadowColor = nil;
-    markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
+      switch (self.color)
+      {
+          case KalTileMarkerColorRed:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red.png"];
+              break;
+          case KalTileMarkerColorYellow:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow.png"];
+              break;
+          case KalTileMarkerColorGreen:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green.png"];
+              break;
+          default:
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
+              break;
+      }
+
+      if (flags.new_edit)
+      {
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+      }
   }
   else
   {
@@ -138,11 +171,14 @@ extern const CGSize kTileSize;
               break;
       }
 
+      if (flags.new_edit)
+      {
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+      }
   }
     
     if (flags.new_edit)
     {
-        selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
         [selectionImage drawInRect:CGRectMake(21.f, 35.f, 4.f, 5.f)];
     }
   
