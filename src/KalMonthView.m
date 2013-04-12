@@ -163,13 +163,16 @@ extern const CGSize kTileSize;
 {
   for (KalTileView *tile in self.subviews)
   {
-    NSArray * filtered = [dates filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NSDate = %@",[tile.date NSDate]]];
+    //NSArray * filtered = [dates filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NSDate = %@",[tile.date NSDate]]];
       
-    //tile.marked = [dates containsObject:tile.date];
+    tile.marked = [dates containsObject:tile.date];
+    tile.date.selectedDate = YES;
+    tile.new_edit = [dates containsObject:tile.date];
+    tile.date.selectedDate = NO;
       
-    tile.marked = ([filtered count] > 0)?YES:NO;
-    tile.color = [self getMarkerColor:filtered];
-    tile.new_edit = [self hasNewSelected:filtered];
+//    tile.marked = ([filtered count] > 0)?YES:NO;
+//    tile.color = [self getMarkerColor:filtered];
+//    tile.new_edit = [self hasNewSelected:filtered];
       
     NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
    

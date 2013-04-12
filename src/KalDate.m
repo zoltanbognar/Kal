@@ -98,6 +98,12 @@ static KalDate *today;
     return NO;
   
   KalDate *d = (KalDate*)anObject;
+    
+    if (self.selectedDate)
+    {
+        return a.day == [d day] && a.month == [d month] && a.year == [d year] && self.selectedDate == d.selectedDate;
+    }
+    
   return a.day == [d day] && a.month == [d month] && a.year == [d year];
 }
 
