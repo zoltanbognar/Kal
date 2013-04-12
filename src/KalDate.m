@@ -57,6 +57,7 @@ static KalDate *today;
     a.day = day;
     a.month = month;
     a.year = year;
+    self.colorId = -1;
   }
   return self;
 }
@@ -94,17 +95,21 @@ static KalDate *today;
 
 - (BOOL)isEqual:(id)anObject
 {
-  if (![anObject isKindOfClass:[KalDate class]])
-    return NO;
-  
-  KalDate *d = (KalDate*)anObject;
+    if (![anObject isKindOfClass:[KalDate class]])
+        return NO;
     
-    if (self.selectedDate)
+    KalDate *d = (KalDate*)anObject;
+    
+    if (self.colorId > -1)
+    {
+        return a.day == [d day] && a.month == [d month] && a.year == [d year] && self.colorId == d.colorId;
+    }
+    else if (self.selectedDate)
     {
         return a.day == [d day] && a.month == [d month] && a.year == [d year] && self.selectedDate == d.selectedDate;
     }
     
-  return a.day == [d day] && a.month == [d month] && a.year == [d year];
+    return a.day == [d day] && a.month == [d month] && a.year == [d year];
 }
 
 - (NSUInteger)hash

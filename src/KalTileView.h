@@ -13,12 +13,12 @@ enum {
 typedef char KalTileType;
 
 enum {
-    KalTileMarkerColorRed   = 0,
-    KalTileMarkerColorYellow  = 1 << 0,
-    KalTileMarkerColorGreen   = 1 << 1,
-    KalTileMarkerColorDefault   = 1 << 2,
+    KalTileMarkerColorDefault   = 0,
+    KalTileMarkerColorRed  = 1 << 0,
+    KalTileMarkerColorYellow   = 1 << 1,
+    KalTileMarkerColorGreen   = 1 << 2,
 };
-typedef char KalTileMarkerColor;
+typedef NSUInteger KalTileMarkerColor;
 
 @class KalDate;
 

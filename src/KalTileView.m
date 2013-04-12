@@ -23,7 +23,7 @@ extern const CGSize kTileSize;
     [self setIsAccessibilityElement:YES];
     [self setAccessibilityTraits:UIAccessibilityTraitButton];
     [self resetState];
-      self.color = KalTileMarkerColorDefault;
+    self.color = KalTileMarkerColorDefault;
   }
   return self;
 }
@@ -61,13 +61,13 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_today.png"];
               break;
           default:
-              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_today.png"];
               break;
       }
       
       if (flags.new_edit)
       {
-          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
       }
     
   }
@@ -77,6 +77,7 @@ extern const CGSize kTileSize;
     textColor = [UIColor whiteColor];
     shadowColor = [UIColor blackColor];
     //markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+      
       switch (self.color)
       {
           case KalTileMarkerColorRed:
@@ -89,13 +90,13 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_today.png"];
               break;
           default:
-              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_today.png"];
               break;
       }
 
       if (flags.new_edit)
       {
-          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_today.png"];
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_today.png"];
       }
   }
   else if (self.selected)
@@ -116,13 +117,13 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green_selected.png"];
               break;
           default:
-              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow_selected.png"];
               break;
       }
 
       if (flags.new_edit)
       {
-          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red_selected.png"];
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_selected.png"];
       }
 
   }
@@ -142,13 +143,13 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green.png"];
               break;
           default:
-              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow.png"];
               break;
       }
 
       if (flags.new_edit)
       {
-          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red.png"];
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_dim.png"];
       }
   }
   else
@@ -168,13 +169,13 @@ extern const CGSize kTileSize;
               markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_green.png"];
               break;
           default:
-              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
+              markerImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_yellow.png"];
               break;
       }
 
       if (flags.new_edit)
       {
-          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker_red.png"];
+          selectionImage = [UIImage imageNamed:@"Kal.bundle/kal_marker.png"];
       }
   }
     

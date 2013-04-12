@@ -161,35 +161,62 @@ extern const CGSize kTileSize;
 
 - (void)markTilesForDates:(NSArray *)dates
 {
-  for (KalTileView *tile in self.subviews)
-  {
-    //NSArray * filtered = [dates filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NSDate = %@",[tile.date NSDate]]];
-      
-    tile.marked = [dates containsObject:tile.date];
-    tile.date.selectedDate = YES;
-    tile.new_edit = [dates containsObject:tile.date];
-    tile.date.selectedDate = NO;
-      
-//    tile.marked = ([filtered count] > 0)?YES:NO;
-//    tile.color = [self getMarkerColor:filtered];
-//    tile.new_edit = [self hasNewSelected:filtered];
-      
-    NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
-   
-    if (dayString)
+    for (KalTileView *tile in self.subviews)
     {
-      NSMutableString *helperText = [[[NSMutableString alloc] initWithCapacity:128] autorelease];
-      if ([tile.date isToday])
-        [helperText appendFormat:@"%@ ", NSLocalizedString(@"Today", @"Accessibility text for a day tile that represents today")];
+        //NSArray * filtered = [dates filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NSDate = %@",[tile.date NSDate]]];
         
-      [helperText appendString:dayString];
+        tile.marked = [dates containsObject:tile.date];
+        tile.date.selectedDate = YES;
+        tile.new_edit = [dates containsObject:tile.date];
+        tile.date.selectedDate = NO;
+        tile.date.colorId = 0;
+        tile.color = 0;
         
-      if (tile.marked)
-        [helperText appendFormat:@". %@", NSLocalizedString(@"Marked", @"Accessibility text for a day tile which is marked with a small dot")];
         
-      [tile setAccessibilityLabel:helperText];
+        //tile.color = tile.color | ([dates containsObject:tile.date])? KalTileMarkerColorRed : KalTileMarkerColorDefault;
+        if ([dates containsObject:tile.date]) {
+            tile.color = tile.color | KalTileMarkerColorRed;
+        }
+        
+        tile.date.colorId = 1;
+        
+        
+        //tile.color = tile.color | ([dates containsObject:tile.date])? KalTileMarkerColorYellow : KalTileMarkerColorDefault;
+        if ([dates containsObject:tile.date]) {
+            tile.color = tile.color | KalTileMarkerColorYellow;
+        }
+
+        
+        
+        tile.date.colorId = 2;
+        //tile.color = tile.color | ([dates containsObject:tile.date])? KalTileMarkerColorGreen : KalTileMarkerColorDefault;
+        if ([dates containsObject:tile.date]) {
+            tile.color = tile.color | KalTileMarkerColorGreen;
+        }
+        tile.date.colorId = -1;
+        
+       // NSLog(@"tile marker color %d",tile.color);
+       
+        //    tile.marked = ([filtered count] > 0)?YES:NO;
+        //    tile.color = [self getMarkerColor:filtered];
+        //    tile.new_edit = [self hasNewSelected:filtered];
+        
+        NSString *dayString = [tileAccessibilityFormatter stringFromDate:[tile.date NSDate]];
+        
+        if (dayString)
+        {
+            NSMutableString *helperText = [[[NSMutableString alloc] initWithCapacity:128] autorelease];
+            if ([tile.date isToday])
+                [helperText appendFormat:@"%@ ", NSLocalizedString(@"Today", @"Accessibility text for a day tile that represents today")];
+            
+            [helperText appendString:dayString];
+            
+            if (tile.marked)
+                [helperText appendFormat:@". %@", NSLocalizedString(@"Marked", @"Accessibility text for a day tile which is marked with a small dot")];
+            
+            [tile setAccessibilityLabel:helperText];
+        }
     }
-  }
 }
 
 #pragma mark -
