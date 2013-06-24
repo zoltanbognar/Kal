@@ -93,7 +93,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 - (void)setSelectedTile:(KalTileView *)tile
 {
     
-    NSLog(@"KalGridView::setSelectedTile - touchBegin:%d",self.tochesBegin);
+    //NSLog(@"KalGridView::setSelectedTile - touchBegin:%d",self.tochesBegin);
     
     if (self.selectionMode)
     {
