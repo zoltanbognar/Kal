@@ -36,16 +36,16 @@ static KalDate *today;
 + (KalDate *)dateFromNSDate:(NSDate *)date
 {
   NSDateComponents *parts = [date cc_componentsForMonthDayAndYear];
-  return [KalDate dateForDay:[parts day] month:[parts month] year:[parts year]];
+  return [KalDate dateForDay:(unsigned int)[parts day] month:(unsigned int)[parts month] year:(unsigned int)[parts year]];
 }
 
 + (KalDate *)dateFromNSDate:(NSDate *)date withColorId:(NSUInteger) colorId
 {
     NSDateComponents *parts = [date cc_componentsForMonthDayAndYear];
     
-    KalDate *kalDate = [[[KalDate alloc] initForDay:[parts day]
-                                              month:[parts month]
-                                               year:[parts year]] autorelease];
+    KalDate *kalDate = [[[KalDate alloc] initForDay:(unsigned int)[parts day]
+                                              month:(unsigned int)[parts month]
+                                               year:(unsigned int)[parts year]] autorelease];
     kalDate.colorId = colorId;
     
     return kalDate;
